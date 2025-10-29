@@ -13,6 +13,9 @@ FetchContent_MakeAvailable(yyjson reflectcpp CLI11 universal-cslib)
 add_subdirectory(rip)
 add_subdirectory(rip-hl)
 
+# This works around a bug in reflectcpp's CMakeLists.txt. It incorrectly adds an include dir in the build tree, which does not exist.
+file(MAKE_DIRECTORY ${reflectcpp_BINARY_DIR}/include)
+
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(rip-config-version.cmake VERSION ${PROJECT_VERSION} COMPATIBILITY SameMinorVersion)
 configure_file(cmake/rip-config.cmake "${CMAKE_CURRENT_BINARY_DIR}/rip-config.cmake" COPYONLY)
